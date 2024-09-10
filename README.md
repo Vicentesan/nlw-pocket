@@ -1,1 +1,0 @@
-# TurboRepo NextJs (NEXT-15-RC + REACT-19-RC) + Fastify Template
