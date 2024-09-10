@@ -1,4 +1,4 @@
 {
-  "extends": "@repo/tsconfig/library.json",
+  "extends": "@in-orbit/tsconfig/library.json",
   "include": ["index.ts"]
 }

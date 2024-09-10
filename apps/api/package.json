@@ -1,5 +1,5 @@
 {
-  "name": "@repo/api",
+  "name": "@in-orbit/api",
   "version": "0.0.0",
   "scripts": {
     "env:load": "dotenv -e ../../.env --",
@@ -10,24 +10,24 @@
     "@fastify/jwt": "^8.0.1",
     "@fastify/swagger": "^8.15.0",
     "@fastify/swagger-ui": "^4.0.1",
-    "@repo/env": "workspace:*",
+    "@in-orbit/env": "workspace:*",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^2.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/prettier": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
+    "@in-orbit/eslint-config": "workspace:*",
+    "@in-orbit/prettier": "workspace:*",
+    "@in-orbit/tsconfig": "workspace:*",
     "@types/node": "^20",
     "dotenv-cli": "^7.4.2",
     "tsx": "^4.16.2"
   },
-  "prettier": "@repo/prettier",
+  "prettier": "@in-orbit/prettier",
   "eslintConfig": {
     "extends": [
-      "@repo/eslint-config/node"
+      "@in-orbit/eslint-config/node"
     ]
   }
 }

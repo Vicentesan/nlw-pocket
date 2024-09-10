@@ -1,21 +1,21 @@
 {
-  "name": "@repo/env",
+  "name": "@in-orbit/env",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
   "types": "index.ts",
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/prettier": "workspace:*",
-    "@repo/tsconfig": "workspace:*",
+    "@in-orbit/eslint-config": "workspace:*",
+    "@in-orbit/prettier": "workspace:*",
+    "@in-orbit/tsconfig": "workspace:*",
     "@types/node": "^20.12.7"
   },
   "eslintConfig": {
     "extends": [
-      "@repo/eslint-config/library"
+      "@in-orbit/eslint-config/library"
     ]
   },
-  "prettier": "@repo/prettier",
+  "prettier": "@in-orbit/prettier",
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",
     "zod": "^3.22.5"
