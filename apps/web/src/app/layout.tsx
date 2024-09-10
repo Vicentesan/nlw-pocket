@@ -3,8 +3,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'TurboRepo Template',
-  description: 'NextJs RC + Fastify',
+  title: 'InOrbit | Make your Life Easier',
+  description:
+    'InOrbit is an Open Source application developed during the Rocketseat NLW to help you with your daily tasks organization.',
 }
 
 export default function RootLayout({
