@@ -13,6 +13,7 @@ import {
 
 import { errorHandler } from './error-handler'
 import { createGoalRoute } from './routes/create-goal-route'
+import { fetchWeekPendingGoalsRoute } from './routes/fetch-week-pending-goals-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -52,6 +53,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCors) // any front-end can access this API
 
 app.register(createGoalRoute)
+app.register(fetchWeekPendingGoalsRoute)
 
 app
   .listen({
