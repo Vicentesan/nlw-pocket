@@ -12,6 +12,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { createGoalRoute } from './routes/create-goal-route'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -49,6 +50,8 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCors) // any front-end can access this API
+
+app.register(createGoalRoute)
 
 app
   .listen({
