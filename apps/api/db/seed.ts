@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { db, pool } from './connection'
 import { goalCompletions, goals } from './schema'
 
@@ -18,9 +20,17 @@ async function seed() {
     ])
     .returning()
 
-  await db
-    .insert(goalCompletions)
-    .values([...result.map((goal) => ({ goalId: goal.id }))])
+  const startOfWeek = dayjs().startOf('week')
+
+  await db.insert(goalCompletions).values([
+    ...result.map((goal) => ({
+      goalId: goal.id,
+      date:
+        goal.title === 'Read 1 book per week'
+          ? startOfWeek.toDate()
+          : startOfWeek.add(1, 'day').toDate(),
+    })),
+  ])
 }
 
 seed().finally(() => pool.end)
