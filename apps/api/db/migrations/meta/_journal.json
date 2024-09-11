@@ -8,6 +8,13 @@
       "when": 1726063827375,
       "tag": "0000_heavy_mastermind",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1726064210046,
+      "tag": "0001_bumpy_boom_boom",
+      "breakpoints": true
     }
   ]
 }
