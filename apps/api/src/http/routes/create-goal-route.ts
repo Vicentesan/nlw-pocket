@@ -3,9 +3,9 @@ import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
 import {
-  createGoal,
   createGoalRequestSchema,
   createGoalResponseSchema,
+  createGoalUseCase,
 } from '@/use-cases/create-goal-use-case'
 
 export function createGoalRoute(app: FastifyInstance) {
@@ -28,7 +28,10 @@ export function createGoalRoute(app: FastifyInstance) {
     async (req, res) => {
       const { title, desiredWeeklyFrequency } = req.body
 
-      const { goal } = await createGoal({ title, desiredWeeklyFrequency })
+      const { goal } = await createGoalUseCase({
+        title,
+        desiredWeeklyFrequency,
+      })
 
       return res.status(201).send({ goal })
     },

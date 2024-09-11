@@ -20,10 +20,13 @@ export const createGoalResponseSchema = z.object({
 type CreateGoalRequest = z.infer<typeof createGoalRequestSchema>
 type CreateGoalResponse = z.infer<typeof createGoalResponseSchema>
 
-export async function createGoal({
-  title,
-  desiredWeeklyFrequency,
-}: CreateGoalRequest): Promise<CreateGoalResponse> {
+export async function createGoalUseCase(
+  props: CreateGoalRequest,
+): Promise<CreateGoalResponse> {
+  const { title, desiredWeeklyFrequency } = createGoalRequestSchema.parse({
+    ...props,
+  })
+
   const result = await db
     .insert(goals)
     .values({
@@ -34,5 +37,5 @@ export async function createGoal({
 
   const goal = result[0]
 
-  return { goal }
+  return createGoalResponseSchema.parse({ goal })
 }
