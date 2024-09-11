@@ -8,7 +8,7 @@ import {
   createGoalUseCase,
 } from '@/use-cases/create-goal-use-case'
 
-export function createGoalRoute(app: FastifyInstance) {
+export async function createGoalRoute(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     '/goals',
     {
