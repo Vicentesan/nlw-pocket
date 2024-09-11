@@ -1,6 +1,6 @@
 {
   "extends": "@in-orbit/tsconfig/node.json",
-  "include": ["src/**/*", "types/*.d.ts"],
+  "include": ["src/**/*", "types/*.d.ts", "types"],
 
   "compilerOptions": {
     "baseUrl": ".",
