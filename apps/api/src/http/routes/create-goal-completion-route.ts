@@ -9,13 +9,12 @@ import {
 
 export async function createGoalCompletionRoute(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/completions',
+    '/goals/:goalId/completions',
     {
       schema: {
         tags: ['goals'],
         summary: 'Complete a goal',
-        body: z.object({
-          // here, we should use params... but when we use it the zod doesn't recognize the goalId as a cuid2
+        params: z.object({
           ...createGoalCompletionUseCaseRequestSchema.shape,
         }),
         response: {
@@ -24,7 +23,7 @@ export async function createGoalCompletionRoute(app: FastifyInstance) {
       },
     },
     async (req, res) => {
-      const { goalId } = req.body
+      const { goalId } = req.params
 
       await createGoalCompletionUseCase({ goalId })
 
