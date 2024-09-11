@@ -33,4 +33,8 @@ async function seed() {
   ])
 }
 
-seed().finally(() => pool.end)
+seed().finally(() => {
+  pool.end()
+
+  process.exit(0)
+})

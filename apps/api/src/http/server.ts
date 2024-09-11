@@ -12,6 +12,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from './error-handler'
+import { createGoalCompletionRoute } from './routes/create-goal-completion-route'
 import { createGoalRoute } from './routes/create-goal-route'
 import { fetchWeekPendingGoalsRoute } from './routes/fetch-week-pending-goals-route'
 
@@ -53,6 +54,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCors) // any front-end can access this API
 
 app.register(createGoalRoute)
+app.register(createGoalCompletionRoute)
 app.register(fetchWeekPendingGoalsRoute)
 
 app
