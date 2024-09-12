@@ -1,7 +1,11 @@
 import type { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
+import { z } from 'zod'
 
-import { fetchWeekSummaryUseCase } from '@/use-cases/fetch-week-summary-use-case'
+import {
+  fetchWeekSummaryUseCase,
+  fetchWeekSummaryUseCaseResponse,
+} from '@/use-cases/fetch-week-summary-use-case'
 
 export async function fetchWeekSummaryRoute(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
@@ -10,6 +14,11 @@ export async function fetchWeekSummaryRoute(app: FastifyInstance) {
       schema: {
         tags: ['goals'],
         summary: 'Fetch week goals summary',
+        response: {
+          200: z.object({
+            ...fetchWeekSummaryUseCaseResponse.shape,
+          }),
+        },
       },
     },
     async (_, res) => {

@@ -2,8 +2,31 @@ import dayjs from 'dayjs'
 import { db } from 'db/connection'
 import { goalCompletions, goals } from 'db/schema'
 import { and, eq, gte, lte, sql } from 'drizzle-orm'
+import { z } from 'zod'
 
-export async function fetchWeekSummaryUseCase() {
+const goalsPerDaySchema = z.record(
+  z
+    .object({
+      id: z.string(),
+      title: z.string(),
+      completedAt: z.coerce.date(),
+    })
+    .array(),
+)
+
+export const fetchWeekSummaryUseCaseResponse = z.object({
+  summary: z.object({
+    completed: z.number().int(),
+    total: z.number().int(),
+    goalsPerDay: goalsPerDaySchema,
+  }),
+})
+
+type FetchWeekSummaryUseCaseResponse = z.infer<
+  typeof fetchWeekSummaryUseCaseResponse
+>
+
+export async function fetchWeekSummaryUseCase(): Promise<FetchWeekSummaryUseCaseResponse> {
   const lastDayOfWeek = dayjs().endOf('week').toDate()
   const firstDayOfWeek = dayjs().startOf('week').toDate()
 
@@ -59,7 +82,7 @@ export async function fetchWeekSummaryUseCase() {
       .groupBy(goalsCompletedInCurrentWeek.completedAtDate),
   )
 
-  const result = await db
+  const summary = await db
     .with(
       goalsCreatedUpToCurrentWeek,
       goalsCompletedInCurrentWeek,
@@ -83,5 +106,13 @@ export async function fetchWeekSummaryUseCase() {
     })
     .from(goalsCompletedByWeekDay)
 
-  return { summary: result }
+  try {
+    const parsedSummary = fetchWeekSummaryUseCaseResponse.parse({
+      summary: summary[0],
+    })
+
+    return parsedSummary
+  } catch (error) {
+    throw new Error(error as string)
+  }
 }
