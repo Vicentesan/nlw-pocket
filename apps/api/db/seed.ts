@@ -25,10 +25,10 @@ async function seed() {
   await db.insert(goalCompletions).values([
     ...result.map((goal) => ({
       goalId: goal.id,
-      date:
-        goal.title === 'Read 1 book per week'
+      createdAt:
+        goal.id === result[0].id
           ? startOfWeek.toDate()
-          : startOfWeek.add(1, 'day').toDate(),
+          : startOfWeek.add(2, 'day').toDate(),
     })),
   ])
 }
